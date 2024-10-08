@@ -30,11 +30,22 @@ public class HWController {
         return new ResponseEntity<>("external API Greetings!", HttpStatus.OK);
     }
 
-    @GetMapping("/get-external-data")
-    public ResponseEntity<String> getExternalData() {
-        //String apiUrl = "https://api.example.com/data"; // URL of the external API
-        String apiUrl = appConfig.getExternalApiUrl();
-        System.out.println("apiUrl - " + apiUrl);
+    @GetMapping("/get-external-data1")
+    public ResponseEntity<String> getExternalData1() {
+        String apiUrl = appConfig.getExternalApiUrl1();
+        System.out.println("apiUrl 1 - " + apiUrl);
+
+        // Call the external API and get the response as a String
+        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+
+        // Return the response body
+        return new ResponseEntity<>(response.getBody(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-external-data2")
+    public ResponseEntity<String> getExternalData2() {
+        String apiUrl = appConfig.getExternalApiUrl2();
+        System.out.println("apiUrl 2 - " + apiUrl);
 
         // Call the external API and get the response as a String
         ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
